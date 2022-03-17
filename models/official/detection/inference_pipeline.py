@@ -5,8 +5,8 @@ from __future__ import print_function
 import sys
 import os
 import logging
-sys.path.insert(1, "/home/mihirgoyal/ds-video-commerce-poc/fashionpedia_pretrained_model/tpu/models/official/efficientnet")
-sys.path.insert(2, "/home/mihirgoyal/ds-video-commerce-poc/fashionpedia_pretrained_model/tpu/models")
+sys.path.insert(1, "../efficientnet") # /tpu/models/official/efficientnet/
+sys.path.insert(2, "../..") # /tpu/models/
 logger=logging.getLogger('logger')  
 logger.setLevel(logging.DEBUG)
 
