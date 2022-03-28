@@ -1,0 +1,2130 @@
+{
+  "level0": {
+    "1": "female",
+    "2": "male",
+    "3": "kid"
+  },
+  "level1": {
+    "1": {
+      "1": "top",
+      "2": "shirt",
+      "3": "pant",
+      "4": "sweater",
+      "5": "jean",
+      "6": "jacket",
+      "7": "coat",
+      "8": "shorts",
+      "9": "hoodie",
+      "10": "t-shirt",
+      "11": "kurta",
+      "12": "dress",
+      "13": "saree",
+      "14": "lehenga-choli",
+      "15": "dupatta",
+      "16": "palazzo",
+      "17": "capri",
+      "18": "gown",
+      "19": "skirt",
+      "20": "legging",
+      "21": "nighty",
+      "22": "salwar-suit",
+      "23": "anarkali",
+      "24": "blouse",
+      "25": "churidar",
+      "26": "jumpsuit",
+      "27": "shrug",
+      "28": "patiala",
+      "29": "bra",
+      "30": "trouser",
+      "31": "pyjama",
+      "32": "waistcoat",
+      "33": "cargo",
+      "34": "blazer",
+      "35": "dungaree",
+      "36": "cardigan"
+    },
+    "2": {
+      "1": "pant",
+      "2": "shirt",
+      "3": "trouser",
+      "4": "jean",
+      "5": "jacket",
+      "6": "pyjama",
+      "7": "shorts",
+      "8": "t-shirt",
+      "9": "hoodie",
+      "10": "sweater",
+      "11": "coat",
+      "12": "kurta",
+      "13": "cargo",
+      "14": "blazer",
+      "15": "capri",
+      "16": "dhoti",
+      "17": "waistcoat",
+      "18": "vest",
+      "19": "dungaree",
+      "20": "boxer",
+      "21": "cardigan"
+    },
+    "3": {
+      "1": "t-shirt",
+      "2": "shirt",
+      "3": "pant",
+      "4": "shorts",
+      "5": "full"
+    }
+  },
+  "level2": {
+    "1": {
+      "1": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "2": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "design",
+        "4": "colour"
+      },
+      "3": {
+        "1": "material",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "4": {
+        "1": "neck-style",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "5": {
+        "1": "colour"
+      },
+      "6": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "7": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "8": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "9": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "10": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "11": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "12": {
+        "1": "length",
+        "2": "sleeve-length",
+        "3": "neck-style",
+        "4": "print-style",
+        "5": "colour"
+      },
+      "13": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "14": {
+        "1": "neck-style",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "15": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "16": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "17": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "18": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "19": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "20": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "21": {
+        "1": "length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "22": {
+        "1": "neck-style",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "23": {
+        "1": "neck-style",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "24": {
+        "1": "neck-style",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "25": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "26": {
+        "1": "neck-style",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "27": {
+        "1": "length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "28": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "29": {
+        "1": "colour"
+      },
+      "30": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "31": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "32": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "33": {
+        "1": "colour"
+      },
+      "34": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "35": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "36": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "colour"
+      }
+    },
+    "2": {
+      "1": {
+        "1": "material",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "2": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "design",
+        "4": "colour"
+      },
+      "3": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "4": {
+        "1": "colour"
+      },
+      "5": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "6": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "7": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "8": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "9": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "10": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "11": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "12": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "13": {
+        "1": "colour"
+      },
+      "14": {
+        "1": "sleeve-length",
+        "2": "print-style",
+        "3": "colour"
+      },
+      "15": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "16": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "17": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "18": {
+        "1": "colour"
+      },
+      "19": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "20": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "21": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "colour"
+      }
+    },
+    "3": {
+      "1": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "2": {
+        "1": "sleeve-length",
+        "2": "neck-style",
+        "3": "print-style",
+        "4": "colour"
+      },
+      "3": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "4": {
+        "1": "print-style",
+        "2": "colour"
+      },
+      "5": {
+        "1": "print-style",
+        "2": "colour"
+      }
+    }
+  },
+  "level3": {
+    "1": {
+      "1": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "2": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "striped",
+          "2": "checkered"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "3": {
+        "1": {
+          "1": "denim",
+          "2": "unknown"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "4": {
+        "1": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "5": {
+        "1": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "6": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "7": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "8": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "9": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "10": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "11": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "12": {
+        "1": {
+          "1": "maxi",
+          "2": "midi",
+          "3": "short"
+        },
+        "2": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "3": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "4": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "5": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "13": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "14": {
+        "1": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "15": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "16": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "17": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "18": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "19": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "20": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "21": {
+        "1": {
+          "1": "midi",
+          "2": "maxi"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "22": {
+        "1": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "23": {
+        "1": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "24": {
+        "1": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "25": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "26": {
+        "1": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "27": {
+        "1": {
+          "1": "short",
+          "2": "long"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "28": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "29": {
+        "1": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "30": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "31": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "32": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "33": {
+        "1": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "34": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "35": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "36": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      }
+    },
+    "2": {
+      "1": {
+        "1": {
+          "1": "denim",
+          "2": "unknown"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "2": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "striped",
+          "2": "checkered"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "3": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "4": {
+        "1": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "5": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "6": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "7": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "8": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "9": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "10": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "11": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "12": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "13": {
+        "1": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "14": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "15": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "16": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "17": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "18": {
+        "1": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "19": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "20": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "21": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      }
+    },
+    "3": {
+      "1": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "2": {
+        "1": {
+          "1": "full-sleeve",
+          "2": "sleeveless",
+          "3": "half-sleeve"
+        },
+        "2": {
+          "1": "round-neck",
+          "2": "v-neck",
+          "3": "collared-neck",
+          "4": "deep-neck"
+        },
+        "3": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "4": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "3": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "4": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      },
+      "5": {
+        "1": {
+          "1": "floral-print",
+          "2": "embroid",
+          "3": "graphic-print",
+          "4": "solid"
+        },
+        "2": {
+          "1": "black",
+          "2": "blue",
+          "3": "multicolor",
+          "4": "white",
+          "5": "red",
+          "6": "pink",
+          "7": "grey",
+          "8": "green",
+          "9": "yellow",
+          "10": "brown",
+          "11": "maroon",
+          "12": "gold",
+          "13": "silver",
+          "14": "purple",
+          "15": "orange"
+        }
+      }
+    }
+  }
+}

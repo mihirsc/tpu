@@ -1,0 +1,3 @@
+[submodule "models/official/detection/FaceLib"]
+	path = models/official/detection/FaceLib
+	url = https://github.com/sajjjadayobi/FaceLib.git
