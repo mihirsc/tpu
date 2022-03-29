@@ -6,7 +6,6 @@ from PIL import Image
 from google.cloud import storage
 from flask_cors import CORS, cross_origin
 from flask import Flask, request, send_file, jsonify
-from time import perf_counter
 
 def upload_to_bucket(bucket_prefix, dir_name, filename, bucket):
     blob = bucket.blob(bucket_prefix + filename)
@@ -30,21 +29,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/single_image_inference', methods=['POST'])
 @cross_origin()
 def single_image_inference():
-    x = perf_counter()
     image = request.files['query']
     img = Image.open(image)
     filename = str(int(time.time()))+ "_" + image.filename
     img.save(os.path.join('query_images', filename))
     upload_to_bucket(bucket_prefix, 'query_images', filename, bucket)
     items = model.search_query(os.path.join('query_images', filename))
-    print('Search took',perf_counter()-x,'seconds')
-    print()
     return jsonify(results=items)
 
 @app.route('/multi_image_inference', methods=['POST'])
 @cross_origin()
 def multi_image_inference():
-    x = perf_counter()
     images = request.files.getlist('queries')
     items_all = []
     for image in images:
@@ -54,8 +49,6 @@ def multi_image_inference():
         upload_to_bucket(bucket_prefix, 'query_images', filename, bucket)
         items = model.search_query(os.path.join('query_images', filename))
         items_all.append(items)
-    print('Search took',perf_counter()-x,'seconds')
-    print()
     return jsonify(results=items_all)
 
 app.run(host='0.0.0.0')

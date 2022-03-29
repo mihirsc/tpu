@@ -40,7 +40,6 @@ from utils import mask_utils
 from utils.object_detection import visualization_utils
 from hyperparameters import params_dict
 from time import perf_counter
-from google.cloud import bigquery, storage
 import argparse
 
 from map_fashionpedia_to_flipkart import map_fashionpedia2flipkart as process_tags
@@ -127,7 +126,7 @@ class Model:
         params.validate()
         params.lock()
 
-#         tf.compat.v1.disable_eager_execution() #For TF2
+        tf.compat.v1.disable_eager_execution() #For TF2
         model = model_factory.model_generator(params)
         self.image_input = tf.placeholder(shape=(), dtype=tf.string)
         image = tf.io.decode_image(self.image_input, channels=3)
@@ -222,7 +221,7 @@ class Model:
         return predictions
     
     def search_query(self, filename):
-        print(filename)
+        logger.info('Filename: ' + filename)
         image_bytes, width, height = self.read_image(filename, self.image_size)
         np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks = self.get_predictions(image_bytes, width, height)
         predictions = self.post_process_predictions(np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks)
@@ -243,21 +242,12 @@ class Model:
         dominant_colors = get_dominant_color(img, mask)
         st = search_tags[0] + dominant_colors
         st = [s.lower() for s in st]
-        print(st)
-        print()
+        logger.info('Query Tags: ' + ' '.join([s for s in st]))
         
         items = match_items(self.catalog_data, st)
         for i in items:
-            print("Tags:", i['tags'])
-            print("Match Vals:", i['match_vals'])
-            print("Scores:", i['scores'])
-            print()
+            logger.info('Product Tags: ' + ' '.join([t for t in i['tags']]))
+            logger.info('Scores: ' + str(i['scores']))
         response = [[i['pid'],i['url'],i['image_url']] for i in items]
 
         return response
-    
-if __name__ == '__main__':
-    model = Model()
-    model.search_query('test.jpg')
-    model.search_query('down.jpeg')
-    model.search_query('testing.jpg')
