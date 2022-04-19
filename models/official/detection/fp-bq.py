@@ -2,8 +2,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import pprint
-
 import sys
 import os
 import logging
@@ -11,17 +9,9 @@ import logging
 sys.path.append('../..')
 sys.path.append('../efficientnet')
 sys.path.append(os.path.join(os.path.dirname(__file__), 'FaceLib'))
-sys.path.append(os.path.join(os.path.dirname(__file__), "query-dataset-gen-tool", "util"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "query-dataset-gen-tool", "service"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "query-dataset-gen-tool", "temp"))
 
 logger=logging.getLogger('logger')  
 logger.setLevel(logging.DEBUG)
-
-from data_util import read_catalog
-from tag_annotation_service import add_tags
-from cos_sim import match_items
-from parse_json import parse_json
 
 import cv2
 import csv
@@ -35,18 +25,22 @@ import tensorflow.compat.v1 as tf
 from dataloader import mode_keys
 from projects.fashionpedia.configs import factory as config_factory
 from projects.fashionpedia.modeling import factory as model_factory
-from utils import box_utils
-from utils import input_utils
-from utils import mask_utils
+from utils import box_utils, input_utils, mask_utils
 from utils.object_detection import visualization_utils
 from hyperparameters import params_dict
 from time import perf_counter
 from google.cloud import bigquery, storage
 import argparse
 
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.stem import PorterStemmer
+from nltk.tokenize import RegexpTokenizer
+
 import webcolors
 import matplotlib.colors as mc
-from facelib import FaceDetector, AgeGenderEstimator
+from map_fashionpedia_to_flipkart import map_fashionpedia2flipkart as process_tags
 
 def closest_colour(requested_colour):
     min_colours = {}
@@ -100,27 +94,36 @@ def get_dominant_color(img, mask):
             dominant_colors.append(c)
     return list(set(dominant_colors))
 
-def get_gender(image_path):
-    face_detector = FaceDetector()
-    age_gender_detector = AgeGenderEstimator()
+def delete_stop_words(corpus):
+    stop_words = set(stopwords.words('english'))
+    filtered_list = [w for w in corpus if not w.lower() in stop_words]
+    return filtered_list
 
-    image = cv2.imread(image_path)
-    faces, boxes, scores, landmarks = face_detector.detect_align(image)
-    if faces.tolist():
-        genders, ages = age_gender_detector.detect(faces)
-    else:
-        genders = [None]
-    return genders[0]
+def lemmatize(corpus):
+    lemmatizer = WordNetLemmatizer()
+    lemmatized_list = [lemmatizer.lemmatize(w) for w in corpus]
+    return lemmatized_list
+
+def stem(corpus):
+    stemmer = PorterStemmer()
+    stemmed_list = [stemmer.stem(w) for w in corpus]
+    return stemmed_list
+
+def clean_attributes(attributes):
+    tokenizer_nltk = RegexpTokenizer(r'\w+(?:-\w+)*')
+    attributes = [a for a in attributes if a not in ['no non-textile material', 'no special manufacturing technique', 'no waistline']]
+    attributes_joined = ' '.join(attributes)
+    tokens = stem(lemmatize(delete_stop_words(tokenizer_nltk.tokenize(attributes_joined))))
+    return tokens
          
 class Model:
-    min_score_threshold = 0.5
+    min_score_threshold = 0.8
     image_size = 640
     label_map_dict = None
     attribute_index = None
     image_input = None
     predictions = None
     sess = None
-    catalog_data = None
     table_client = None
     table_catalog_name = None
     table_inference_name = None
@@ -206,40 +209,69 @@ class Model:
             encoded_masks = [ mask_api.encode(np.asfortranarray(np_mask)) for np_mask in list(np_masks) ]
         return np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks
     
-    def post_process_predictions(self, np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks):
-        max_index, max_score = 0, 0
-        for i in range(len(np_scores)):
-            if np_classes[i] not in range(12) and np_classes[i] not in range(20,22):
+    def post_process_predictions(self, np_scores, np_classes, np_attributes):
+        predictions = {}
+        for i in range(len(np_classes)):
+            class_id = np_classes[i]
+            class_name = self.label_map_dict[class_id]['name']
+            confidence = np_scores[i]
+            attributes = [self.attribute_index[j] for j in range(len(np_attributes[i])) if np_attributes[i][j] > self.min_score_threshold]
+            attribute_scores = [np_attributes[i][j] for j in range(len(np_attributes[i])) if np_attributes[i][j] > self.min_score_threshold]
+            attributes_class = {}
+            for j in range(len(attributes)):
+                name = attributes[j]['name']
+                score = attribute_scores[j]
+                supername = attributes[j]['supercategory']
+                if supername not in attributes_class:
+                    attributes_class[supername] = {'confidence': 0, 'name': ''}
+                if attributes_class[supername]['confidence'] <= score:
+                    attributes_class[supername]['name'] = name
+                    attributes_class[supername]['confidence'] = score
+            if confidence < self.min_score_threshold:
                 continue
-            if np_scores[i] > max_score:
-                max_score = np_scores[i]
-                max_index = i
-        
-        class_id = np_classes[max_index]
-        class_name = self.label_map_dict[class_id]['name']
-        confidence = np_scores[max_index]
-        
-        attribute_list = np_attributes[max_index]
-        attributes = [self.attribute_index[j] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
-        attribute_names = [self.attribute_index[j]['name'] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
-        attribute_scores = [attribute_list[j] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
-
-        return max_index, class_name, attribute_names
+            if class_name not in predictions:
+                predictions[class_name] = {'confidence': 0}
+            if predictions[class_name]['confidence'] <= confidence:
+                predictions[class_name]['confidence'] = confidence
+                predictions[class_name]['attributes'] = attributes_class
+                predictions[class_name]['index'] = i 
+        return predictions
     
     def search_query(self, filename):
+#         print(filename)
         image_bytes, width, height = self.read_image(filename, self.image_size)
         np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks = self.get_predictions(image_bytes, width, height)
-        max_index, class_name, attribute_names = self.post_process_predictions(np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks)
+        predictions = self.post_process_predictions(np_scores, np_classes, np_attributes)
+        gender, upperbody_query_words, lowerbody_query_words, other_query_words, upperbody_index, lowerbody_index = process_tags(filename, predictions)
+        
+        response = []
         img = Image.open(filename)
-        mask = np_masks[max_index]
-        dominant_colors = get_dominant_color(img, mask)
-        gender = get_gender(filename)
-#         print(filename)
-#         print(class_name, gender, attribute_names, dominant_colors)
-#         print()
-        return self.search(class_name, gender, attribute_names, dominant_colors)
+        
+        if upperbody_index != -1:
+            class_name = self.label_map_dict[np_classes[upperbody_index]]['name']
+            confidence = np_scores[upperbody_index]
+            attribute_list = np_attributes[upperbody_index]
+            attribute_names = [self.attribute_index[j]['name'] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
+            mask = np_masks[upperbody_index]
+            dominant_colors = get_dominant_color(img, mask)
+#             print(class_name, confidence, attribute_names, dominant_colors)
+            searchResponse = self.search(class_name, gender, attribute_names, dominant_colors, upperbody_query_words)
+            response.append([class_name, searchResponse])
+            
+        if lowerbody_index != -1:
+            class_name = self.label_map_dict[np_classes[lowerbody_index]]['name']
+            confidence = np_scores[lowerbody_index]
+            attribute_list = np_attributes[lowerbody_index]
+            attribute_names = [self.attribute_index[j]['name'] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
+            mask = np_masks[lowerbody_index]
+            dominant_colors = get_dominant_color(img, mask)
+#             print(class_name, confidence, attribute_names, dominant_colors)
+            searchResponse = self.search(class_name, gender, attribute_names, dominant_colors, lowerbody_query_words)
+            response.append([class_name, searchResponse])
+
+        return response
     
-    def search(self, class_name, gender, attribute_names, dominant_colors):
+    def search(self, class_name, gender, attribute_names, dominant_colors, query_words):
         if gender == 'Male':
             gender = 'man'
         elif gender == 'Female':
@@ -247,30 +279,43 @@ class Model:
         else:
             gender = '%man'
         gender_condition = ' AND gender LIKE "' + gender + '"'
+                
+        attribute_tag_condition = ', ARRAY (SELECT * FROM UNNEST(' + str(attribute_names) + ') INTERSECT DISTINCT (SELECT * FROM ' + self.table_inference_name + '.attributes)) as attribute_result' if attribute_names else ''
         
-        attribute_condition = ''
-        for a in attribute_names:
-            attribute_condition += ' AND "' + a + '" IN UNNEST(attributes)'
+        product_attributes = clean_attributes(query_words)
+        product_tag_condition = ', ARRAY (SELECT * FROM UNNEST(' + str(product_attributes) + ') INTERSECT DISTINCT (SELECT * FROM ' + self.table_catalog_name + '.product_tags)) as product_result' if product_attributes else ''
          
         color_condition = ' AND "' + dominant_colors[0] + '" IN UNNEST(product_tags)'
+        
         category_condition = ' product_category = "' + class_name + '"'
         
-        queryI = 'SELECT product_id FROM ' + self.table_inference_name + ' WHERE' + category_condition + attribute_condition
-        queryP = 'SELECT * FROM ' + self.table_catalog_name + ' WHERE product_id IN (' + queryI + ')' + gender_condition + color_condition + ' LIMIT 5'
-                
-        rows = self.table_client.query(queryP)
+        timestamp_condition = '  AND ' + self.table_catalog_name + '.timestamp IN (SELECT MAX(timestamp) FROM ' + self.table_catalog_name + ' GROUP BY product_id) AND ' + self.table_inference_name + '.timestamp IN (SELECT MAX(timestamp) FROM ' + self.table_inference_name + ' GROUP BY product_id)'
+        
+        queryT = 'SELECT *' + attribute_tag_condition + product_tag_condition + ' FROM `maximal-furnace-783.video_commerce_experiments.fk_catalog_data` INNER JOIN `maximal-furnace-783.video_commerce_experiments.fk_catalog_inferred_data` USING (product_id) WHERE' + category_condition + gender_condition + color_condition + timestamp_condition + ' ORDER BY'
+        
+        if attribute_names: 
+            queryT += ' ARRAY_LENGTH(attribute_result) DESC,' 
+        if product_attributes:
+            queryT += ' ARRAY_LENGTH(product_result) DESC,'
+        queryT += ' product_category_confidence DESC LIMIT 5'
+        
+#         print(queryT)
+#         print()
+        
+        rows = self.table_client.query(queryT)
         while not rows.done():
             pass
         
         response = []
+        index = 0
         for r in rows:
+            index += 1
             image_url = r['image_url'].replace('{@height}','640').replace('{@width}','640').replace('?q={@quality}', '')
             responseItem = [r['product_id'], r['page_url'], image_url]
             response.append(responseItem)
-#             print(responseItem)
-#             print()
+#             print(index, r['product_id'], r['product_category'], r['title'], r['attributes'], r['gender'])
         return response
-    
+            
 if __name__ == '__main__':
     model = Model()
     print(model.search_query('test.jpg'))
