@@ -2,8 +2,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import pprint
-
 import sys
 import os
 import logging
@@ -39,75 +37,15 @@ from utils import input_utils
 from utils import mask_utils
 from utils.object_detection import visualization_utils
 from hyperparameters import params_dict
-from time import perf_counter
-import argparse
+from google.cloud import bigquery, storage
 
-from map_fashionpedia_to_flipkart import map_fashionpedia2flipkart as process_tags
+from search_utils.color_detector import get_dominant_color
+from search_utils.attribute_cleanup import clean_attributes
+from search_utils.map_fashionpedia_to_flipkart import map_fashionpedia2flipkart as process_tags
 
-import webcolors
-import matplotlib.colors as mc
-
-def closest_colour(requested_colour):
-    min_colours = {}
-    for name, key in mc.CSS4_COLORS.items():
-        r_c, g_c, b_c = webcolors.hex_to_rgb(key)
-        rd = (r_c - requested_colour[0]) ** 2
-        gd = (g_c - requested_colour[1]) ** 2
-        bd = (b_c - requested_colour[2]) ** 2
-        min_colours[(rd + gd + bd)] = name
-    return min_colours[min(min_colours.keys())]
-
-def get_dominant_color(img, mask):
-    common_colors = {}
-    common_colors['red'] = ['coral', 'crimson', 'darkred', 'darksalmon', 'firebrick', 'indianred', 'lightcoral', 'lightsalmon', 'maroon', 'mistyrose', 'red', 'salmon', 'sienna', 'tomato']
-    common_colors['blue'] = ['aliceblue', 'aqua', 'aquamarine', 'azure', 'blue', 'blueviolet', 'cadetblue', 'cornflowerblue', 'cyan', 'darkblue', 'darkcyan', 'darkslateblue', 'darkturquoise', 'deepskyblue', 'dodgerblue', 'lightblue', 'lightcyan', 'lightskyblue', 'lightsteelblue', 'mediumaquamarine', 'mediumblue', 'mediumslateblue', 'mediumturquoise', 'midnightblue', 'navy', 'paleturquoise', 'powderblue', 'royalblue', 'skyblue', 'slateblue', 'steelblue', 'teal', 'turquoise']
-    common_colors['yellow'] = ['cornsilk', 'darkgoldenrod', 'gold', 'goldenrod', 'lemonchiffon', 'lightgoldenrodyellow', 'lightyellow', 'palegoldenrod', 'yellow']
-    common_colors['green'] = ['chartreuse', 'darkgreen', 'darkkhaki', 'darkolivegreen', 'darkseagreen', 'forestgreen', 'green', 'greenyellow', 'honeydew', 'khaki', 'lawngreen', 'lightgreen', 'lightseagreen', 'lime', 'limegreen', 'mediumseagreen', 'mediumspringgreen', 'mintcream', 'olive', 'olivedrab', 'palegreen', 'seagreen', 'springgreen', 'yellowgreen']
-    common_colors['black'] = ['black']
-    common_colors['white'] = ['antiquewhite', 'floralwhite', 'ghostwhite', 'ivory', 'navajowhite', 'snow', 'white', 'whitesmoke']
-    common_colors['grey'] = ['darkgray', 'darkgrey', 'darkslategray', 'darkslategrey', 'dimgray', 'dimgrey', 'gainsboro', 'gray', 'grey', 'lightgray', 'lightgrey', 'lightslategray', 'lightslategrey', 'slategray', 'slategrey']
-    common_colors['brown'] = ['brown', 'burlywood', 'chocolate', 'peru', 'rosybrown', 'saddlebrown', 'sandybrown']
-    common_colors['cream'] = ['beige', 'bisque', 'blanchedalmond', 'linen', 'oldlace', 'moccasin', 'papayawhip', 'peachpuff', 'seashell', 'tan', 'wheat']
-    common_colors['purple'] = ['darkmagenta', 'darkorchid', 'darkviolet', 'fuchsia', 'indigo', 'lavender', 'lavenderblush', 'magenta', 'mediumorchid', 'mediumpurple', 'mediumvioletred', 'orchid', 'palevioletred', 'plum', 'purple', 'rebeccapurple', 'thistle', 'violet'] 
-    common_colors['orange'] = ['darkorange', 'orange', 'orangered']
-    common_colors['pink'] = ['deeppink', 'hotpink', 'lightpink', 'pink']
-    common_colors['silver'] = ['silver']
-    ni = np.array(img)
-    counter = {}
-    for i in range(len(mask)):
-        for j in range(len(mask[i])):
-            if mask[i][j]:
-                r, g, b = ni[i][j]
-                r = r - (r%20)
-                g = g - (g%20)
-                b = b - (b%20)
-                c = (r,g,b)
-                if c not in counter:
-                    counter[c] = 0
-                counter[c] += 1
-    colors = [[c,counter[c]] for c in counter]
-    colors.sort(key=lambda x:x[1], reverse=True)
-    d_c = list(set([closest_colour(c[0]) for c in colors[:2]]))
-    dominant_colors = []
-    for c in d_c:
-        check = True
-        for common_color in common_colors:
-            if c in common_colors[common_color]:
-                dominant_colors.append(common_color)
-                check = False
-        if check:
-            dominant_colors.append(c)
-    return list(set(dominant_colors))
-         
 class Model:
-    min_score_threshold = 0.5
+    min_score_threshold = 0.8
     image_size = 640
-    label_map_dict = None
-    attribute_index = None
-    image_input = None
-    predictions = None
-    sess = None
-    catalog_data = None
     
     def __init__(self,
                  model_name='attribute_mask_rcnn',
@@ -126,7 +64,7 @@ class Model:
         params.validate()
         params.lock()
 
-        tf.compat.v1.disable_eager_execution() #For TF2
+#         tf.compat.v1.disable_eager_execution() #For TF2
         model = model_factory.model_generator(params)
         self.image_input = tf.placeholder(shape=(), dtype=tf.string)
         image = tf.io.decode_image(self.image_input, channels=3)
@@ -149,7 +87,6 @@ class Model:
         
         self.catalog_data = read_catalog()
         add_tags(self.catalog_data)
-        
 
     def getDatasetInfo(self, path_to_label_map, path_to_attribute_map):
         label_map_dict = {}
@@ -220,13 +157,13 @@ class Model:
 
         return predictions
     
-    def search_query(self, filename):
-        logger.info('Filename: ' + filename)
+    def search(self, filename):
         image_bytes, width, height = self.read_image(filename, self.image_size)
         np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks = self.get_predictions(image_bytes, width, height)
         predictions = self.post_process_predictions(np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks)
 
         gender, upperbody_query_words, lowerbody_query_words, other_query_words, upperbody_index, lowerbody_index = process_tags(filename, predictions)
+        
         search_tags = []
         for li in [upperbody_query_words, lowerbody_query_words, other_query_words]:
             tags = [gender] if gender else []
@@ -236,18 +173,15 @@ class Model:
                 tag = tag.replace('-', '')
                 tags += tag.split(' ')
             search_tags.append(list(set(tags)))
-
-        img = Image.open(filename)
         mask = np_masks[upperbody_index]
-        dominant_colors = get_dominant_color(img, mask)
+        dominant_colors = get_dominant_color(filename, mask)
         st = search_tags[0] + dominant_colors
-        st = [s.lower() for s in st]
-        logger.info('Query Tags: ' + ' '.join([s for s in st]))
+        st = clean_attributes(st)
         
         items = match_items(self.catalog_data, st)
-        for i in items:
-            logger.info('Product Tags: ' + ' '.join([t for t in i['tags']]))
-            logger.info('Scores: ' + str(i['scores']))
         response = [[i['pid'],i['url'],i['image_url']] for i in items]
-
         return response
+    
+if __name__ == '__main__':
+    model = Model()
+    model.search_query('test.jpg')

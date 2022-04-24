@@ -8,7 +8,6 @@ import logging
 
 sys.path.append('../..')
 sys.path.append('../efficientnet')
-sys.path.append(os.path.join(os.path.dirname(__file__), 'FaceLib'))
 
 logger=logging.getLogger('logger')  
 logger.setLevel(logging.DEBUG)
@@ -28,105 +27,15 @@ from projects.fashionpedia.modeling import factory as model_factory
 from utils import box_utils, input_utils, mask_utils
 from utils.object_detection import visualization_utils
 from hyperparameters import params_dict
-from time import perf_counter
 from google.cloud import bigquery, storage
-import argparse
 
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.stem import PorterStemmer
-from nltk.tokenize import RegexpTokenizer
-
-import webcolors
-import matplotlib.colors as mc
-from map_fashionpedia_to_flipkart import map_fashionpedia2flipkart as process_tags
-
-def closest_colour(requested_colour):
-    min_colours = {}
-    for name, key in mc.CSS4_COLORS.items():
-        r_c, g_c, b_c = webcolors.hex_to_rgb(key)
-        rd = (r_c - requested_colour[0]) ** 2
-        gd = (g_c - requested_colour[1]) ** 2
-        bd = (b_c - requested_colour[2]) ** 2
-        min_colours[(rd + gd + bd)] = name
-    return min_colours[min(min_colours.keys())]
-
-def get_dominant_color(img, mask):
-    common_colors = {}
-    common_colors['red'] = ['coral', 'crimson', 'darkred', 'darksalmon', 'firebrick', 'indianred', 'lightcoral', 'lightsalmon', 'maroon', 'mistyrose', 'red', 'salmon', 'sienna', 'tomato']
-    common_colors['blue'] = ['aliceblue', 'aqua', 'aquamarine', 'azure', 'blue', 'blueviolet', 'cadetblue', 'cornflowerblue', 'cyan', 'darkblue', 'darkcyan', 'darkslateblue', 'darkturquoise', 'deepskyblue', 'dodgerblue', 'lightblue', 'lightcyan', 'lightskyblue', 'lightsteelblue', 'mediumaquamarine', 'mediumblue', 'mediumslateblue', 'mediumturquoise', 'midnightblue', 'navy', 'paleturquoise', 'powderblue', 'royalblue', 'skyblue', 'slateblue', 'steelblue', 'teal', 'turquoise']
-    common_colors['yellow'] = ['cornsilk', 'darkgoldenrod', 'gold', 'goldenrod', 'lemonchiffon', 'lightgoldenrodyellow', 'lightyellow', 'palegoldenrod', 'yellow']
-    common_colors['green'] = ['chartreuse', 'darkgreen', 'darkkhaki', 'darkolivegreen', 'darkseagreen', 'forestgreen', 'green', 'greenyellow', 'honeydew', 'khaki', 'lawngreen', 'lightgreen', 'lightseagreen', 'lime', 'limegreen', 'mediumseagreen', 'mediumspringgreen', 'mintcream', 'olive', 'olivedrab', 'palegreen', 'seagreen', 'springgreen', 'yellowgreen']
-    common_colors['black'] = ['black']
-    common_colors['white'] = ['antiquewhite', 'floralwhite', 'ghostwhite', 'ivory', 'navajowhite', 'snow', 'white', 'whitesmoke']
-    common_colors['grey'] = ['darkgray', 'darkgrey', 'darkslategray', 'darkslategrey', 'dimgray', 'dimgrey', 'gainsboro', 'gray', 'grey', 'lightgray', 'lightgrey', 'lightslategray', 'lightslategrey', 'slategray', 'slategrey']
-    common_colors['brown'] = ['brown', 'burlywood', 'chocolate', 'peru', 'rosybrown', 'saddlebrown', 'sandybrown']
-    common_colors['cream'] = ['beige', 'bisque', 'blanchedalmond', 'linen', 'oldlace', 'moccasin', 'papayawhip', 'peachpuff', 'seashell', 'tan', 'wheat']
-    common_colors['purple'] = ['darkmagenta', 'darkorchid', 'darkviolet', 'fuchsia', 'indigo', 'lavender', 'lavenderblush', 'magenta', 'mediumorchid', 'mediumpurple', 'mediumvioletred', 'orchid', 'palevioletred', 'plum', 'purple', 'rebeccapurple', 'thistle', 'violet'] 
-    common_colors['orange'] = ['darkorange', 'orange', 'orangered']
-    common_colors['pink'] = ['deeppink', 'hotpink', 'lightpink', 'pink']
-    common_colors['silver'] = ['silver']
-    ni = np.array(img)
-    counter = {}
-    for i in range(len(mask)):
-        for j in range(len(mask[i])):
-            if mask[i][j]:
-                r, g, b = ni[i][j]
-                r = r - (r%20)
-                g = g - (g%20)
-                b = b - (b%20)
-                c = (r,g,b)
-                if c not in counter:
-                    counter[c] = 0
-                counter[c] += 1
-    colors = [[c,counter[c]] for c in counter]
-    colors.sort(key=lambda x:x[1], reverse=True)
-    d_c = list(set([closest_colour(c[0]) for c in colors[:2]]))
-    dominant_colors = []
-    for c in d_c:
-        check = True
-        for common_color in common_colors:
-            if c in common_colors[common_color]:
-                dominant_colors.append(common_color)
-                check = False
-        if check:
-            dominant_colors.append(c)
-    return list(set(dominant_colors))
-
-def delete_stop_words(corpus):
-    stop_words = set(stopwords.words('english'))
-    filtered_list = [w for w in corpus if not w.lower() in stop_words]
-    return filtered_list
-
-def lemmatize(corpus):
-    lemmatizer = WordNetLemmatizer()
-    lemmatized_list = [lemmatizer.lemmatize(w) for w in corpus]
-    return lemmatized_list
-
-def stem(corpus):
-    stemmer = PorterStemmer()
-    stemmed_list = [stemmer.stem(w) for w in corpus]
-    return stemmed_list
-
-def clean_attributes(attributes):
-    tokenizer_nltk = RegexpTokenizer(r'\w+(?:-\w+)*')
-    attributes = [a for a in attributes if a not in ['no non-textile material', 'no special manufacturing technique', 'no waistline']]
-    attributes_joined = ' '.join(attributes)
-    tokens = stem(lemmatize(delete_stop_words(tokenizer_nltk.tokenize(attributes_joined))))
-    return tokens
+from search_utils.color_detector import get_dominant_color
+from search_utils.attribute_cleanup import clean_attributes
+from search_utils.map_fashionpedia_to_flipkart import map_fashionpedia2flipkart as process_tags
          
 class Model:
     min_score_threshold = 0.8
     image_size = 640
-    label_map_dict = None
-    attribute_index = None
-    image_input = None
-    predictions = None
-    sess = None
-    table_client = None
-    table_catalog_name = None
-    table_inference_name = None
     
     def __init__(self,
                  model_name='attribute_mask_rcnn',
@@ -237,15 +146,13 @@ class Model:
                 predictions[class_name]['index'] = i 
         return predictions
     
-    def search_query(self, filename):
-#         print(filename)
+    def search(self, filename):
         image_bytes, width, height = self.read_image(filename, self.image_size)
         np_boxes, np_scores, np_classes, np_attributes, np_masks, encoded_masks = self.get_predictions(image_bytes, width, height)
         predictions = self.post_process_predictions(np_scores, np_classes, np_attributes)
         gender, upperbody_query_words, lowerbody_query_words, other_query_words, upperbody_index, lowerbody_index = process_tags(filename, predictions)
         
         response = []
-        img = Image.open(filename)
         
         if upperbody_index != -1:
             class_name = self.label_map_dict[np_classes[upperbody_index]]['name']
@@ -253,10 +160,11 @@ class Model:
             attribute_list = np_attributes[upperbody_index]
             attribute_names = [self.attribute_index[j]['name'] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
             mask = np_masks[upperbody_index]
-            dominant_colors = get_dominant_color(img, mask)
-#             print(class_name, confidence, attribute_names, dominant_colors)
-            searchResponse = self.search(class_name, gender, attribute_names, dominant_colors, upperbody_query_words)
-            response.append([class_name, searchResponse])
+            dominant_colors = get_dominant_color(filename, mask)
+            print(class_name, confidence, attribute_names, dominant_colors)
+            upperbody_query = self.create_query(class_name, gender, attribute_names, dominant_colors, upperbody_query_words)
+            search_response = self.search_query(upperbody_query)
+            response.append([class_name, search_response])
             
         if lowerbody_index != -1:
             class_name = self.label_map_dict[np_classes[lowerbody_index]]['name']
@@ -264,58 +172,63 @@ class Model:
             attribute_list = np_attributes[lowerbody_index]
             attribute_names = [self.attribute_index[j]['name'] for j in range(len(attribute_list)) if attribute_list[j] > self.min_score_threshold]
             mask = np_masks[lowerbody_index]
-            dominant_colors = get_dominant_color(img, mask)
-#             print(class_name, confidence, attribute_names, dominant_colors)
-            searchResponse = self.search(class_name, gender, attribute_names, dominant_colors, lowerbody_query_words)
-            response.append([class_name, searchResponse])
+            dominant_colors = get_dominant_color(filename, mask)
+            print(class_name, confidence, attribute_names, dominant_colors)
+            lowerbody_query = self.create_query(class_name, gender, attribute_names, dominant_colors, lowerbody_query_words)
+            search_response = self.search_query(lowerbody_query)
+            response.append([class_name, search_response])
 
         return response
     
-    def search(self, class_name, gender, attribute_names, dominant_colors, query_words):
+    def create_query(self, class_name, gender, attribute_names, dominant_colors, query_words):
         if gender == 'Male':
             gender = 'man'
         elif gender == 'Female':
             gender = 'woman'
         else:
             gender = '%man'
+
+        product_attributes = clean_attributes(query_words)
+        colors = clean_attributes(dominant_colors)
         gender_condition = ' AND gender LIKE "' + gender + '"'
-                
+        
         attribute_tag_condition = ', ARRAY (SELECT * FROM UNNEST(' + str(attribute_names) + ') INTERSECT DISTINCT (SELECT * FROM ' + self.table_inference_name + '.attributes)) as attribute_result' if attribute_names else ''
         
-        product_attributes = clean_attributes(query_words)
         product_tag_condition = ', ARRAY (SELECT * FROM UNNEST(' + str(product_attributes) + ') INTERSECT DISTINCT (SELECT * FROM ' + self.table_catalog_name + '.product_tags)) as product_result' if product_attributes else ''
          
-        color_condition = ' AND "' + dominant_colors[0] + '" IN UNNEST(product_tags)'
+        color_condition = ' AND "' + colors[0] + '" IN UNNEST(product_tags)'
         
         category_condition = ' product_category = "' + class_name + '"'
         
         timestamp_condition = '  AND ' + self.table_catalog_name + '.timestamp IN (SELECT MAX(timestamp) FROM ' + self.table_catalog_name + ' GROUP BY product_id) AND ' + self.table_inference_name + '.timestamp IN (SELECT MAX(timestamp) FROM ' + self.table_inference_name + ' GROUP BY product_id)'
         
-        queryT = 'SELECT *' + attribute_tag_condition + product_tag_condition + ' FROM `maximal-furnace-783.video_commerce_experiments.fk_catalog_data` INNER JOIN `maximal-furnace-783.video_commerce_experiments.fk_catalog_inferred_data` USING (product_id) WHERE' + category_condition + gender_condition + color_condition + timestamp_condition + ' ORDER BY'
+        query = 'SELECT *' + attribute_tag_condition + product_tag_condition + ' FROM `maximal-furnace-783.video_commerce_experiments.fk_catalog_data` INNER JOIN `maximal-furnace-783.video_commerce_experiments.fk_catalog_inferred_data` USING (product_id) WHERE' + category_condition + gender_condition + color_condition + timestamp_condition + ' ORDER BY'
         
         if attribute_names: 
-            queryT += ' ARRAY_LENGTH(attribute_result) DESC,' 
+            query += ' ARRAY_LENGTH(attribute_result) DESC,' 
         if product_attributes:
-            queryT += ' ARRAY_LENGTH(product_result) DESC,'
-        queryT += ' product_category_confidence DESC LIMIT 5'
+            query += ' ARRAY_LENGTH(product_result) DESC,'
+            
+        query += ' product_category_confidence DESC LIMIT 5'
         
-#         print(queryT)
-#         print()
-        
-        rows = self.table_client.query(queryT)
+        return query
+    
+    def search_query(self, query):
+        print(query, end = '\n\n')
+        rows = self.table_client.query(query)
         while not rows.done():
             pass
-        
         response = []
         index = 0
         for r in rows:
             index += 1
             image_url = r['image_url'].replace('{@height}','640').replace('{@width}','640').replace('?q={@quality}', '')
-            responseItem = [r['product_id'], r['page_url'], image_url]
-            response.append(responseItem)
-#             print(index, r['product_id'], r['product_category'], r['title'], r['attributes'], r['gender'])
+            response_item = [r['product_id'], r['page_url'], image_url]
+            response.append(response_item)
+            print(index, r['product_id'], r['product_category'], r['title'], r['attributes'], r['gender'])
+        print()
         return response
             
 if __name__ == '__main__':
     model = Model()
-    print(model.search_query('test.jpg'))
+    print(model.search('test.jpg'))
