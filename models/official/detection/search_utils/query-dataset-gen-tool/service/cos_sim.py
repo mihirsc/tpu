@@ -129,7 +129,7 @@ def match_items(data, query_tags):
 # 	pretty_print_prods(prods[:5])
 	return prods[:5]
 
-def inverse_dict(file_name=["query-dataset-gen-tool/temp/inverse.csv", "query-dataset-gen-tool/temp/inverse_attribute_values.csv"]):
+def inverse_dict(file_name=["search_utils/query-dataset-gen-tool/temp/inverse.csv", "search_utils/query-dataset-gen-tool/temp/inverse_attribute_values.csv"]):
 	data = pd.read_csv(file_name[1])
 	root_words, words = data["Root"], data["words"]
 	d1 = {}

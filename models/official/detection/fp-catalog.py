@@ -8,9 +8,9 @@ import logging
 
 sys.path.append('../efficientnet')
 sys.path.append('../..')
-sys.path.append(os.path.join(os.path.dirname(__file__), "query-dataset-gen-tool", "util"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "query-dataset-gen-tool", "service"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "query-dataset-gen-tool", "temp"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "search_utils", "query-dataset-gen-tool", "util"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "search_utils", "query-dataset-gen-tool", "service"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "search_utils", "query-dataset-gen-tool", "temp"))
 
 logger=logging.getLogger('logger')  
 logger.setLevel(logging.DEBUG)
